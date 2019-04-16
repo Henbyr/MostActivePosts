@@ -11,6 +11,10 @@
 		4411BCA22266591E002CCA0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4411BCA02266591E002CCA0F /* Main.storyboard */; };
 		4411BCA422665920002CCA0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4411BCA322665920002CCA0F /* Assets.xcassets */; };
 		4411BCA722665920002CCA0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4411BCA522665920002CCA0F /* LaunchScreen.storyboard */; };
+		4430B2C322665F950089758D /* Authorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C222665F950089758D /* Authorizer.swift */; };
+		4430B2C62266751A0089758D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C52266751A0089758D /* Session.swift */; };
+		4430B2C9226676B80089758D /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C8226676B80089758D /* ServiceError.swift */; };
+		4430B2CB2266791E0089758D /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2CA2266791E0089758D /* TokenResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,10 @@
 		4411BCA322665920002CCA0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4411BCA622665920002CCA0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4411BCA822665920002CCA0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4430B2C222665F950089758D /* Authorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorizer.swift; sourceTree = "<group>"; };
+		4430B2C52266751A0089758D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		4430B2C8226676B80089758D /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
+		4430B2CA2266791E0089758D /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,13 +60,49 @@
 		4411BC9B2266591E002CCA0F /* MostActivePosts */ = {
 			isa = PBXGroup;
 			children = (
+				4478942F22665EC300E31C12 /* Classes */,
+				4478942E22665EB700E31C12 /* Storyboards */,
 				4411BC9C2266591E002CCA0F /* AppDelegate.swift */,
-				4411BCA02266591E002CCA0F /* Main.storyboard */,
 				4411BCA322665920002CCA0F /* Assets.xcassets */,
-				4411BCA522665920002CCA0F /* LaunchScreen.storyboard */,
 				4411BCA822665920002CCA0F /* Info.plist */,
 			);
 			path = MostActivePosts;
+			sourceTree = "<group>";
+		};
+		4430B2C4226675040089758D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4430B2C52266751A0089758D /* Session.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4478942E22665EB700E31C12 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4411BCA02266591E002CCA0F /* Main.storyboard */,
+				4411BCA522665920002CCA0F /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		4478942F22665EC300E31C12 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4430B2C4226675040089758D /* Extensions */,
+				4478943022665EEE00E31C12 /* Services */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		4478943022665EEE00E31C12 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4430B2C222665F950089758D /* Authorizer.swift */,
+				4430B2CA2266791E0089758D /* TokenResponse.swift */,
+				4430B2C8226676B80089758D /* ServiceError.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,7 +176,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4430B2C9226676B80089758D /* ServiceError.swift in Sources */,
 				4411BC9D2266591E002CCA0F /* AppDelegate.swift in Sources */,
+				4430B2C322665F950089758D /* Authorizer.swift in Sources */,
+				4430B2C62266751A0089758D /* Session.swift in Sources */,
+				4430B2CB2266791E0089758D /* TokenResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

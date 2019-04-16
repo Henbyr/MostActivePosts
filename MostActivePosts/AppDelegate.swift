@@ -15,6 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        let authorizer = Authorizer()
+        authorizer.obtainToken { result in
+            switch result {
+            case .success(let token):
+                break
+            case .failure(let error):
+                break
+            }
+        }
+        
+        
         return true
     }
 
