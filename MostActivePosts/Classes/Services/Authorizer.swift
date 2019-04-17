@@ -10,35 +10,19 @@ import Foundation
 
 class Authorizer {
     
-    private let configuration = Configuration()
+    private let authData = AuthData()
     
-    func obtainToken(completion: @escaping (Result<TokenResponse, ServiceError>) -> ()) {
-        guard let request = configuration.request else { return }
+    func obtainToken(completion: @escaping (Result<TokenResponse, SessionError>) -> Void) {
+        guard let request = authData.request else { return }
         
-        URLSession.shared.dataTask(with: request) { result in
-            switch result {
-            case .success(let response, let data):
-                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= statusCode else {
-                    completion(.failure(.invalidStatus))
-                    return
-                }
-                do {
-                    let values = try JSONDecoder().decode(TokenResponse.self, from: data)
-                    completion(.success(values))
-                } catch {
-                    completion(.failure(.decodingFailed))
-                }
-            case .failure:
-                completion(.failure(.tokenFailed))
-            }
-        }.resume()
+        Session.request(request, completion: completion)
     }
     
 }
 
 extension Authorizer {
     
-    struct Configuration {
+    struct AuthData {
         
         private let authURL = "https://www.reddit.com/api/v1/access_token"
         private let clientId = "YUtZb2FCTmVnOHVnZVE6"
