@@ -9,7 +9,7 @@
 class TokenResponse: Codable {
     
     let accessToken: String
-    let expiresIn: Int
+    let expiresIn: Double
     
     enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"

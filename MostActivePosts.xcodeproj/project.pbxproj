@@ -13,7 +13,6 @@
 		4411BCA722665920002CCA0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4411BCA522665920002CCA0F /* LaunchScreen.storyboard */; };
 		4430B2C322665F950089758D /* Authorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C222665F950089758D /* Authorizer.swift */; };
 		4430B2C62266751A0089758D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C52266751A0089758D /* Session.swift */; };
-		4430B2C9226676B80089758D /* SessionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C8226676B80089758D /* SessionError.swift */; };
 		4430B2CB2266791E0089758D /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2CA2266791E0089758D /* TokenResponse.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +25,6 @@
 		4411BCA822665920002CCA0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4430B2C222665F950089758D /* Authorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorizer.swift; sourceTree = "<group>"; };
 		4430B2C52266751A0089758D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		4430B2C8226676B80089758D /* SessionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionError.swift; sourceTree = "<group>"; };
 		4430B2CA2266791E0089758D /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,7 +90,6 @@
 				4430B2C222665F950089758D /* Authorizer.swift */,
 				4430B2CA2266791E0089758D /* TokenResponse.swift */,
 				4430B2C52266751A0089758D /* Session.swift */,
-				4430B2C8226676B80089758D /* SessionError.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -168,7 +165,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4430B2C9226676B80089758D /* SessionError.swift in Sources */,
 				4411BC9D2266591E002CCA0F /* AppDelegate.swift in Sources */,
 				4430B2C322665F950089758D /* Authorizer.swift in Sources */,
 				4430B2C62266751A0089758D /* Session.swift in Sources */,

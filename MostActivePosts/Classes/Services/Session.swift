@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum SessionError: Error {
+    case statusInvalid
+    case decodingFailed
+    case endpointError(error: Error)
+}
+
 class Session {
     
     static func request<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<T, SessionError>) -> Void) {
@@ -42,7 +48,7 @@ extension URLSession {
             }
             
             guard let response = response, let data = data else {
-                let error = NSError(domain: "error", code: 0, userInfo: nil)
+                let error = NSError(domain: "Domain", code: 0, userInfo: nil)
                 result(.failure(error))
                 return
             }
