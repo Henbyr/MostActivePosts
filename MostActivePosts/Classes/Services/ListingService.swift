@@ -12,7 +12,7 @@ class ListingService {
     
     func fetch(endpoint: EndPoint, completion: @escaping (Result<ListingResponse, SessionError>) -> Void) {
         let authorizer = Authorizer()
-        authorizer.obtainToken { result in
+        authorizer.obtainToken(endpoint: .appOnly) { result in
             switch result {
             case .success(let token):
                 guard var request = endpoint.request else {
@@ -29,9 +29,8 @@ class ListingService {
                         completion(.failure(error))
                     }
                 })
-                
             case .failure(let error):
-                break
+                completion(.failure(error))
             }
         }
     }
@@ -39,7 +38,6 @@ class ListingService {
 }
 
 // MARK: - Nested types
-
 extension ListingService {
     enum EndPoint {
         case top(before: String?, after: String?)

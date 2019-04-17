@@ -18,6 +18,7 @@
 		4430B2C322665F950089758D /* Authorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C222665F950089758D /* Authorizer.swift */; };
 		4430B2C62266751A0089758D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C52266751A0089758D /* Session.swift */; };
 		4430B2CB2266791E0089758D /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2CA2266791E0089758D /* TokenResponse.swift */; };
+		4468B8FE2267B7FE00F56F93 /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468B8FD2267B7FE00F56F93 /* OAuthToken.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		4430B2C222665F950089758D /* Authorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorizer.swift; sourceTree = "<group>"; };
 		4430B2C52266751A0089758D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		4430B2CA2266791E0089758D /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
+		4468B8FD2267B7FE00F56F93 /* OAuthToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			children = (
 				4430B2C222665F950089758D /* Authorizer.swift */,
 				441FE02122674389006932AE /* TokenRepository.swift */,
+				4468B8FD2267B7FE00F56F93 /* OAuthToken.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 			files = (
 				4411BC9D2266591E002CCA0F /* AppDelegate.swift in Sources */,
 				441FE02C22677E73006932AE /* ListingResponse.swift in Sources */,
+				4468B8FE2267B7FE00F56F93 /* OAuthToken.swift in Sources */,
 				4430B2C322665F950089758D /* Authorizer.swift in Sources */,
 				441FE02A22676635006932AE /* ListingService.swift in Sources */,
 				4430B2C62266751A0089758D /* Session.swift in Sources */,

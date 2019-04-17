@@ -11,12 +11,11 @@ import Foundation
 enum SessionError: Error {
     case initializationFailed
     case statusInvalid
-    case decodingFailed(error: Error)
+    case decodingFailed(localizedDescription: String)
     case endpointError(error: Error)
 }
 
 class Session {
-    
     static func request<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<T, SessionError>) -> Void) {
         URLSession.shared.dataTask(with: request) { (result) in
             switch result {
@@ -29,18 +28,16 @@ class Session {
                     let values = try JSONDecoder().decode(T.self, from: data)
                     completion(.success(values))
                 } catch let error as NSError {
-                    completion(.failure(.decodingFailed(error: error)))
+                    completion(.failure(.decodingFailed(localizedDescription: error.localizedDescription)))
                 }
             case .failure(let error):
                 completion(.failure(.endpointError(error: error)))
             }
-            }.resume()
+        }.resume()
     }
-    
 }
 
 extension URLSession {
-    
     func dataTask(with request: URLRequest, result: @escaping (Result<(URLResponse, Data), Error>) -> Void) -> URLSessionDataTask {
         return dataTask(with: request, completionHandler: { data, response, error in
             if let error = error {
@@ -57,5 +54,4 @@ extension URLSession {
             result(.success((response, data)))
         })
     }
-    
 }

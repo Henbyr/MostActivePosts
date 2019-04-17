@@ -8,28 +8,8 @@
 
 import Foundation
 
-struct OAuthToken: Codable {
-    
-    var accessToken: String
-    var expiresInDate: Date
-    
-    init(response: TokenResponse) {
-        self.accessToken = response.accessToken
-        self.expiresInDate = Date(timeIntervalSinceNow: response.expiresIn)
-    }
-    
-}
-
-enum AuthorizerError: Error {
-    case notInitialized
-    case endpoint(error: Error)
-}
-
 class Authorizer {
-    
-    private let authData = AuthData()
-    
-    func obtainToken(completion: @escaping (Result<OAuthToken, AuthorizerError>) -> Void) {
+    func obtainToken(endpoint: Endpoint, completion: @escaping (Result<OAuthToken, SessionError>) -> Void) {
         if let token = TokenRepository.token() {
             let currentDate = Date()
             
@@ -39,8 +19,8 @@ class Authorizer {
             }
         }
         
-        guard let request = authData.request else {
-            completion(.failure(.notInitialized))
+        guard let request = endpoint.request else {
+            completion(.failure(.initializationFailed))
             return
         }
         
@@ -52,23 +32,36 @@ class Authorizer {
                 
                 completion(.success(token))
             case .failure(let error):
-                completion(.failure(.endpoint(error: error)))
+                completion(.failure(error))
             }
         }
     }
-    
 }
 
-private extension Authorizer {
-    
-    private struct AuthData {
+// MARK: - Nested types
+extension Authorizer {
+    enum Endpoint {
+        case appOnly
         
-        private let authURL = "https://www.reddit.com/api/v1/access_token"
-        private let clientId = "YUtZb2FCTmVnOHVnZVE6"
-        private let grandType = "https://oauth.reddit.com/grants/installed_client"
+        private var baseUrl: URL? {
+            switch self {
+            case .appOnly:
+                return URL(string: "https://www.reddit.com/api/v1/access_token")
+            }
+        }
+        
+        private var body: Data? {
+            switch self {
+            case .appOnly:
+                let grandType = "https://oauth.reddit.com/grants/installed_client"
+                
+                let param = "grant_type=\(grandType)&device_id=\(deviceId)"
+                return param.data(using: .utf8)
+            }
+        }
         
         /// Generates and saves device id. The ID should be unique per-device of the app.
-        private let deviceId: String = {
+        private var deviceId: String {
             if let deviceId = UserDefaults.standard.string(forKey: UserDefaultsKeys.deviceId) {
                 return deviceId
             }
@@ -77,28 +70,28 @@ private extension Authorizer {
             UserDefaults.standard.set(uuidString, forKey: UserDefaultsKeys.deviceId)
             
             return uuidString
-        }()
-        
-        private var basicAuthorizationHeader: String {
-            return "Basic \(clientId)"
         }
         
-        private var body: Data? {
-            let param = "grant_type=\(grandType)&device_id=\(deviceId)"
-            return param.data(using: .utf8)
+        private var authHeaderValue: String {
+            switch self {
+            case .appOnly:
+                let clientId = "YUtZb2FCTmVnOHVnZVE6"
+                return "Basic \(clientId)"
+            }
         }
         
         var request: URLRequest? {
-            guard let url = URL(string: authURL) else { return nil }
+            guard let url = baseUrl else { return nil }
             
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.setValue(basicAuthorizationHeader, forHTTPHeaderField: "Authorization")
-            request.httpBody = body
-            
-            return request
+            switch self {
+            case .appOnly:
+                var request = URLRequest(url: url)
+                request.setValue(authHeaderValue, forHTTPHeaderField: "Authorization")
+                request.httpMethod = "POST"
+                request.httpBody = body
+                
+                return request
+            }
         }
-        
     }
-    
 }
