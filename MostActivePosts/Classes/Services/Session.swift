@@ -9,8 +9,9 @@
 import Foundation
 
 enum SessionError: Error {
+    case initializationFailed
     case statusInvalid
-    case decodingFailed
+    case decodingFailed(error: Error)
     case endpointError(error: Error)
 }
 
@@ -27,8 +28,8 @@ class Session {
                 do {
                     let values = try JSONDecoder().decode(T.self, from: data)
                     completion(.success(values))
-                } catch {
-                    completion(.failure(.decodingFailed))
+                } catch let error as NSError {
+                    completion(.failure(.decodingFailed(error: error)))
                 }
             case .failure(let error):
                 completion(.failure(.endpointError(error: error)))

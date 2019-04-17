@@ -13,6 +13,8 @@
 		4411BCA722665920002CCA0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4411BCA522665920002CCA0F /* LaunchScreen.storyboard */; };
 		441FE02222674389006932AE /* TokenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441FE02122674389006932AE /* TokenRepository.swift */; };
 		441FE02822674FBE006932AE /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441FE02722674FBE006932AE /* UserDefaultsKeys.swift */; };
+		441FE02A22676635006932AE /* ListingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441FE02922676635006932AE /* ListingService.swift */; };
+		441FE02C22677E73006932AE /* ListingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441FE02B22677E73006932AE /* ListingResponse.swift */; };
 		4430B2C322665F950089758D /* Authorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C222665F950089758D /* Authorizer.swift */; };
 		4430B2C62266751A0089758D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C52266751A0089758D /* Session.swift */; };
 		4430B2CB2266791E0089758D /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2CA2266791E0089758D /* TokenResponse.swift */; };
@@ -27,6 +29,8 @@
 		4411BCA822665920002CCA0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		441FE02122674389006932AE /* TokenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepository.swift; sourceTree = "<group>"; };
 		441FE02722674FBE006932AE /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		441FE02922676635006932AE /* ListingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingService.swift; sourceTree = "<group>"; };
+		441FE02B22677E73006932AE /* ListingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingResponse.swift; sourceTree = "<group>"; };
 		4430B2C222665F950089758D /* Authorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorizer.swift; sourceTree = "<group>"; };
 		4430B2C52266751A0089758D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		4430B2CA2266791E0089758D /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				4430B2CA2266791E0089758D /* TokenResponse.swift */,
+				441FE02B22677E73006932AE /* ListingResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 				441FE02322674EA7006932AE /* Authorization */,
 				441FE02422674EBB006932AE /* Responses */,
 				4430B2C52266751A0089758D /* Session.swift */,
+				441FE02922676635006932AE /* ListingService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -196,7 +202,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4411BC9D2266591E002CCA0F /* AppDelegate.swift in Sources */,
+				441FE02C22677E73006932AE /* ListingResponse.swift in Sources */,
 				4430B2C322665F950089758D /* Authorizer.swift in Sources */,
+				441FE02A22676635006932AE /* ListingService.swift in Sources */,
 				4430B2C62266751A0089758D /* Session.swift in Sources */,
 				4430B2CB2266791E0089758D /* TokenResponse.swift in Sources */,
 				441FE02822674FBE006932AE /* UserDefaultsKeys.swift in Sources */,
