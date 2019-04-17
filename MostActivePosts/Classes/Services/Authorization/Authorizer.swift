@@ -8,6 +8,18 @@
 
 import Foundation
 
+struct OAuthToken: Codable {
+    
+    var accessToken: String
+    var expiresInDate: Date
+    
+    init(response: TokenResponse) {
+        self.accessToken = response.accessToken
+        self.expiresInDate = Date(timeIntervalSinceNow: response.expiresIn)
+    }
+    
+}
+
 enum AuthorizerError: Error {
     case notInitialized
     case endpoint(error: Error)
@@ -17,13 +29,12 @@ class Authorizer {
     
     private let authData = AuthData()
     
-    func obtainToken(completion: @escaping (Result<String, AuthorizerError>) -> Void) {
-        if let expiresInDate = UserDefaults.standard.value(forKey: "expiresInDate") as? Date {
+    func obtainToken(completion: @escaping (Result<OAuthToken, AuthorizerError>) -> Void) {
+        if let token = TokenRepository.token() {
             let currentDate = Date()
             
-            if let accessToken = UserDefaults.standard.string(forKey: "accessToken"),
-                currentDate < expiresInDate {
-                    completion(.success(accessToken))
+            if currentDate < token.expiresInDate {
+                completion(.success(token))
             }
         }
         
@@ -35,11 +46,10 @@ class Authorizer {
         Session.request(request) { (result: Result<TokenResponse, SessionError>) in
             switch result {
             case .success(let response):
-                let expiresInDate = Date(timeIntervalSinceNow: response.expiresIn)
-                UserDefaults.standard.set(expiresInDate, forKey: "expiresInDate")
-                UserDefaults.standard.set(response.accessToken, forKey: "accessToken")
+                let token = OAuthToken(response: response)
+                TokenRepository.save(token: token)
                 
-                completion(.success(response.accessToken))
+                completion(.success(token))
             case .failure(let error):
                 completion(.failure(.endpoint(error: error)))
             }
@@ -48,9 +58,9 @@ class Authorizer {
     
 }
 
-extension Authorizer {
+private extension Authorizer {
     
-    struct AuthData {
+    private struct AuthData {
         
         private let authURL = "https://www.reddit.com/api/v1/access_token"
         private let clientId = "YUtZb2FCTmVnOHVnZVE6"

@@ -9,11 +9,17 @@
 class TokenResponse: Codable {
     
     let accessToken: String
+    let tokenType: String
+    let deviceId: String
     let expiresIn: Double
+    let scope: String
     
     enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"
+        case tokenType = "token_type"
+        case deviceId = "device_id"
         case expiresIn = "expires_in"
+        case scope
     }
     
 }
