@@ -117,12 +117,12 @@
 			isa = PBXGroup;
 			children = (
 				441FE02622674FA4006932AE /* Helper */,
-				4478943022665EEE00E31C12 /* Services */,
+				4478943022665EEE00E31C12 /* Networking */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		4478943022665EEE00E31C12 /* Services */ = {
+		4478943022665EEE00E31C12 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				441FE02322674EA7006932AE /* Authorization */,
@@ -130,7 +130,7 @@
 				4430B2C52266751A0089758D /* Session.swift */,
 				441FE02922676635006932AE /* ListingService.swift */,
 			);
-			path = Services;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
