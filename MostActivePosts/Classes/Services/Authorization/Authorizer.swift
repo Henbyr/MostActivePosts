@@ -35,6 +35,7 @@ class Authorizer {
             
             if currentDate < token.expiresInDate {
                 completion(.success(token))
+                return
             }
         }
         
@@ -68,12 +69,12 @@ private extension Authorizer {
         
         /// Generates and saves device id. The ID should be unique per-device of the app.
         private let deviceId: String = {
-            if let deviceId = UserDefaults.standard.string(forKey: "deviceId") {
+            if let deviceId = UserDefaults.standard.string(forKey: UserDefaultsKeys.deviceId) {
                 return deviceId
             }
             
             let uuidString = UUID().uuidString
-            UserDefaults.standard.set(uuidString, forKey: "deviceId")
+            UserDefaults.standard.set(uuidString, forKey: UserDefaultsKeys.deviceId)
             
             return uuidString
         }()

@@ -8,6 +8,7 @@
 
 class UserDefaultsKeys {
     
+    static var deviceId = "deviceId"
     static var oauthToken = "oauthToken"
     
 }
