@@ -18,6 +18,8 @@ class PostsViewController: UITableViewController, PostsViewProtocol {
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Post> = {
         let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
+        fetchRequest.fetchLimit = 25
+        
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "likes", ascending: false)]
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,

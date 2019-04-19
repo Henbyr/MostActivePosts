@@ -24,8 +24,8 @@ enum PostsServiceEndPoint {
             
             var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
             components?.queryItems = [
-                URLQueryItem(name: "limit", value: "25"),
-                URLQueryItem(name: "count", value: "25")
+                URLQueryItem(name: "limit", value: "50"),
+                URLQueryItem(name: "count", value: "50")
             ]
             
             if let _ = before {
