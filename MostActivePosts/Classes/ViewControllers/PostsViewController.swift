@@ -18,7 +18,7 @@ class PostsViewController: UITableViewController, PostsViewProtocol {
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Post> = {
         let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "entryDate", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "likes", ascending: false)]
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: coreDataStack.managedContext,
@@ -58,7 +58,7 @@ extension PostsViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: postCellIdentifier, for: indexPath)
         let post = fetchedResultsController.object(at: indexPath)
         
-        cell.textLabel?.text = post.title
+        cell.textLabel?.text = "\(post.likes): \(post.title!)"
         
         return cell
     }

@@ -35,44 +35,50 @@ struct PostsModel: PostsModelProtocol {
     }
     
     private func saveToContext(response: ListingResponse) {
-        _ = response.data.children.compactMap { self.createPost(response: $0.data) }
+        _ = response.data.children.compactMap { self.updatePost(response: $0.data) }
         coreDataStack.saveContext()
     }
     
-    private func createPost(response: ListingChildData) -> NSManagedObject? {
-        if isPostSaved(response: response) {
-            return nil
-        }
+    private func updatePost(response: ListingChildData) -> NSManagedObject? {
+        guard let post = takePost(response: response) else { return nil }
         
-        guard let postEntity = NSEntityDescription.insertNewObject(forEntityName: "Post", into: coreDataStack.managedContext) as? Post else {
-            return nil
-        }
-        
-        postEntity.author = response.author
-        postEntity.entryDate = NSDate(timeIntervalSince1970: response.createdUTC) //TODO: check it
-        postEntity.imageUrl = response.url
+        post.author = response.author
+        post.entryDate = NSDate(timeIntervalSince1970: response.createdUTC) //TODO: check it
+        post.imageUrl = response.url
         if response.thumbnail != "self" && response.thumbnail != "default" {
-            postEntity.thumbnailUrl = response.thumbnail
+            post.thumbnailUrl = response.thumbnail
         }
-        postEntity.totalComments = Int32(response.numComments)
-        postEntity.title = response.title
+        post.totalComments = Int32(response.numComments)
+        post.title = response.title
+        post.likes = Int32(response.ups)
         
-        return postEntity
+        return post
     }
     
-    private func isPostSaved(response: ListingChildData) -> Bool {
+    private func takePost(response: ListingChildData) -> Post? {
+        let predicate = NSPredicate(format: "%K == %@", #keyPath(Post.title), response.title)
+        if let saved = fetchPost(predicate: predicate) {
+            return saved
+        }
+        if let created = NSEntityDescription.insertNewObject(forEntityName: "Post", into: coreDataStack.managedContext) as? Post {
+            return created
+        }
+        return nil
+    }
+    
+    private func fetchPost(predicate: NSPredicate) -> Post? {
         let fetchRequest:NSFetchRequest<Post> = Post.fetchRequest()
-        
-        fetchRequest.resultType = .countResultType
-        fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Post.title), response.title)
+        fetchRequest.predicate = predicate
         
         do {
-            if try coreDataStack.managedContext.count(for: fetchRequest) > 0 {
-                return true
+            let results = try coreDataStack.managedContext.fetch(fetchRequest)
+            if results.count > 0 {
+                return results.first!
             }
         } catch let error as NSError {
             print("\(error.localizedDescription)")
         }
-        return false
+        
+        return nil
     }
 }

@@ -23,5 +23,6 @@ extension Post {
     @NSManaged public var thumbnailUrl: String?
     @NSManaged public var title: String?
     @NSManaged public var totalComments: Int32
+    @NSManaged public var likes: Int32
 
 }
