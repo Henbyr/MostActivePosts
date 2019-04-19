@@ -16,6 +16,8 @@ class PostsViewController: UITableViewController, PostsViewProtocol {
     var presenter: PostsPresenterProtocol!
     var coreDataStack: CoreDataStack!
     
+    private let postCellIdentifier = "PostCell"
+    
     private lazy var fetchedResultsController: NSFetchedResultsController<Post> = {
         let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
         fetchRequest.fetchLimit = 25
@@ -25,25 +27,28 @@ class PostsViewController: UITableViewController, PostsViewProtocol {
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: coreDataStack.managedContext,
                                                     sectionNameKeyPath: nil,
-                                                    cacheName: "MostActivePosts")
+                                                    cacheName: nil)
         controller.delegate = self
         return controller
     }()
-    
-    private let postCellIdentifier = "PostCell"
+    private var isFetchingNextPage: Bool = false
     
     override func viewDidLoad() {
         tableView.prefetchDataSource = self
+        
+        fetchPosts()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        presenter.obtainNewPosts()
+    }
+    
+    private func fetchPosts() {
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
             print("Fetching error: \(error.localizedDescription)")
         }
-        
-        presenter.obtainNewPosts()
     }
 }
 
@@ -67,29 +72,19 @@ extension PostsViewController {
 }
 
 extension PostsViewController: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-
-        switch type {
-        case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .automatic)
-        case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .automatic)
-        default:
-            break
-        }
-    }
-    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
+        tableView.reloadData()
+        isFetchingNextPage = false
     }
 }
 
 extension PostsViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        
+        if let count = fetchedResultsController.fetchedObjects?.count {
+            if !isFetchingNextPage && indexPaths.contains(where: { $0.row == count - 1 }) {
+                isFetchingNextPage = true
+                presenter.obtainNewPosts()
+            }
+        }
     }
 }

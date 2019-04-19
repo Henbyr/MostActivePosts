@@ -23,13 +23,20 @@ class CoreDataStack {
         return self.storeContainer.viewContext
     }()
     
-    private lazy var storeContainer: NSPersistentContainer = {
+    lazy var storeContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: self.modelName)
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
                 print("\(error.localizedDescription)")
             }
         }
+        
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.undoManager = nil
+        container.viewContext.shouldDeleteInaccessibleFaults = true
+        
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        
         return container
     }()
     
