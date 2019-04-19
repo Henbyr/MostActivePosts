@@ -13,4 +13,8 @@ protocol PostsViewProtocol: class {
 
 class PostsViewController: UITableViewController, PostsViewProtocol {
     var presenter: PostsPresenterProtocol!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        presenter.obtainNewPosts()
+    }
 }

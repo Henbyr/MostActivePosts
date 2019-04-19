@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let postsViewController = window?.rootViewController as? PostsViewController {
             let service = ListingService(authorizer: Authorizer())
-            let model = PostsModel(listingService: service, managedContext: coreDataStack.managedContext)
+            let model = PostsModel(listingService: service, coreDataStack: coreDataStack)
             
             postsViewController.presenter = PostsPresenter(view: postsViewController, model: model)
         }

@@ -8,6 +8,8 @@
 
 protocol PostsPresenterProtocol: class {
     init(view: PostsViewProtocol, model: PostsModelProtocol)
+    
+    func obtainNewPosts()
 }
 
 class PostsPresenter: PostsPresenterProtocol {
@@ -17,5 +19,9 @@ class PostsPresenter: PostsPresenterProtocol {
     required init(view: PostsViewProtocol, model: PostsModelProtocol) {
         self.view = view
         self.model = model
+    }
+    
+    func obtainNewPosts() {
+        model.fetchPosts()
     }
 }
