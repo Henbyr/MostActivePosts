@@ -12,12 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    lazy var coreDataStack = CoreDataStack(modelName: "Model")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         if let postsViewController = window?.rootViewController as? PostsViewController {
             let service = ListingService(authorizer: Authorizer())
-            let model = PostsModel(listingService: service)
+            let model = PostsModel(listingService: service, managedContext: coreDataStack.managedContext)
             
             postsViewController.presenter = PostsPresenter(view: postsViewController, model: model)
         }
@@ -25,5 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        coreDataStack.saveContext()
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        coreDataStack.saveContext()
+    }
 }
 

@@ -6,14 +6,18 @@
 //  Copyright © 2019 Eugene Lobyr. All rights reserved.
 //
 
+import CoreData
+
 protocol PostsModelProtocol {
-    init(listingService: PostsServiceProtocol)
+    init(listingService: PostsServiceProtocol, managedContext: NSManagedObjectContext)
 }
 
 struct PostsModel: PostsModelProtocol {
     private let service: PostsServiceProtocol
+    private let managedContext: NSManagedObjectContext
     
-    init(listingService: PostsServiceProtocol) {
+    init(listingService: PostsServiceProtocol, managedContext: NSManagedObjectContext) {
         self.service = listingService
+        self.managedContext = managedContext
     }
 }
