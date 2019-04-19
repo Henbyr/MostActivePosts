@@ -13,8 +13,8 @@ protocol PostsPresenterProtocol: class {
 }
 
 class PostsPresenter: PostsPresenterProtocol {
-    private unowned var view: PostsViewProtocol
-    private let model: PostsModelProtocol
+    private unowned var view: PostsViewProtocol?
+    private var model: PostsModelProtocol
     
     required init(view: PostsViewProtocol, model: PostsModelProtocol) {
         self.view = view

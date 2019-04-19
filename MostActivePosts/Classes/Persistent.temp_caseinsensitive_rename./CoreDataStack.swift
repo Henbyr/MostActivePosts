@@ -15,6 +15,8 @@ class CoreDataStack {
     
     init(modelName: String) {
         self.modelName = modelName
+        
+        managedContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
     
     lazy var managedContext: NSManagedObjectContext = {

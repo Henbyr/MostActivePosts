@@ -17,11 +17,11 @@ extension Post {
         return NSFetchRequest<Post>(entityName: "Post")
     }
 
-    @NSManaged public var title: String?
     @NSManaged public var author: String?
     @NSManaged public var entryDate: NSDate?
-    @NSManaged public var thumbnailUrl: String?
-    @NSManaged public var totalComments: Int32
     @NSManaged public var imageUrl: String?
+    @NSManaged public var thumbnailUrl: String?
+    @NSManaged public var title: String?
+    @NSManaged public var totalComments: Int32
 
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let model = PostsModel(listingService: service, coreDataStack: coreDataStack)
             
             postsViewController.presenter = PostsPresenter(view: postsViewController, model: model)
+            postsViewController.coreDataStack = coreDataStack
         }
         
         return true
