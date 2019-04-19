@@ -40,6 +40,10 @@ struct PostsModel: PostsModelProtocol {
     }
     
     private func createPost(response: ListingChildData) -> NSManagedObject? {
+        if isPostSaved(response: response) {
+            return nil
+        }
+        
         guard let postEntity = NSEntityDescription.insertNewObject(forEntityName: "Post", into: coreDataStack.managedContext) as? Post else {
             return nil
         }
@@ -54,5 +58,21 @@ struct PostsModel: PostsModelProtocol {
         postEntity.title = response.title
         
         return postEntity
+    }
+    
+    private func isPostSaved(response: ListingChildData) -> Bool {
+        let fetchRequest:NSFetchRequest<Post> = Post.fetchRequest()
+        
+        fetchRequest.resultType = .countResultType
+        fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Post.title), response.title)
+        
+        do {
+            if try coreDataStack.managedContext.count(for: fetchRequest) > 0 {
+                return true
+            }
+        } catch let error as NSError {
+            print("\(error.localizedDescription)")
+        }
+        return false
     }
 }

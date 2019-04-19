@@ -23,12 +23,16 @@ class PostsViewController: UITableViewController, PostsViewProtocol {
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: coreDataStack.managedContext,
                                                     sectionNameKeyPath: nil,
-                                                    cacheName: nil)
+                                                    cacheName: "MostActivePosts")
         controller.delegate = self
         return controller
     }()
     
     private let postCellIdentifier = "PostCell"
+    
+    override func viewDidLoad() {
+        tableView.prefetchDataSource = self
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         do {
@@ -66,7 +70,7 @@ extension PostsViewController: NSFetchedResultsControllerDelegate {
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
+
         switch type {
         case .insert:
             tableView.insertRows(at: [newIndexPath!], with: .automatic)
@@ -79,5 +83,11 @@ extension PostsViewController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
+    }
+}
+
+extension PostsViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
     }
 }
