@@ -15,9 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let service = ListingService()
-        service.fetch(endpoint: .top(before: nil, after: nil)) { (result: Result<ListingResponse, SessionError>) in
+        if let postsViewController = window?.rootViewController as? PostsViewController {
+            let service = ListingService(authorizer: Authorizer())
+            let model = PostsModel(listingService: service)
             
+            postsViewController.presenter = PostsPresenter(view: postsViewController, model: model)
         }
         
         return true
