@@ -33,7 +33,7 @@ class PostsViewController: UITableViewController, PostsViewProtocol {
     private var isFetchingNextPage: Bool = false
     
     override func viewDidLoad() {
-        tableView.estimatedRowHeight = 85.0
+        tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableView.automaticDimension
         
         tableView.prefetchDataSource = self
