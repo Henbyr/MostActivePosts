@@ -16,8 +16,6 @@ class PostsViewController: UITableViewController, PostsViewProtocol {
     var presenter: PostsPresenterProtocol!
     var coreDataStack: CoreDataStack!
     
-    private let postCellIdentifier = "PostCell"
-    
     private lazy var fetchedResultsController: NSFetchedResultsController<Post> = {
         let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
         fetchRequest.fetchLimit = 25
@@ -35,6 +33,9 @@ class PostsViewController: UITableViewController, PostsViewProtocol {
     private var isFetchingNextPage: Bool = false
     
     override func viewDidLoad() {
+        tableView.estimatedRowHeight = 85.0
+        tableView.rowHeight = UITableView.automaticDimension
+        
         tableView.prefetchDataSource = self
         
         fetchPosts()
@@ -63,18 +64,23 @@ extension PostsViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: postCellIdentifier, for: indexPath)
-        let post = fetchedResultsController.object(at: indexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.cellIdentifier,
+                                                    for: indexPath) as? PostTableViewCell {
+            let post = fetchedResultsController.object(at: indexPath)
+            
+            cell.configure(with: post)
+            
+            return cell
+        }
         
-        cell.textLabel?.text = "\(post.likes): \(post.title!)"
-        
-        return cell
+        return UITableViewCell()
     }
 }
 
 extension PostsViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
+        
         isFetchingNextPage = false
     }
 }
