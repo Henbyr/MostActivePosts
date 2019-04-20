@@ -24,6 +24,13 @@ public class Post: NSManagedObject {
         return ""
     }
     
+    var imageUrlString: String? {
+        guard let hint = postHint, hint == "image" else {
+            return nil
+        }
+        return imageUrl
+    }
+    
     func update(listingChildData: ListingChildData) {
         self.author = listingChildData.author
         self.entryDate = NSDate(timeIntervalSince1970: listingChildData.createdUTC) //TODO: check it
@@ -34,5 +41,6 @@ public class Post: NSManagedObject {
         self.totalComments = Int32(listingChildData.numComments)
         self.title = listingChildData.title
         self.likes = Int32(listingChildData.ups)
+        self.postHint = listingChildData.postHint
     }
 }

@@ -94,6 +94,8 @@ struct ListingChildData: Codable {
     let created: Double
     /// the time of creation in UTC epoch-second format. Note that neither of these ever have a non-zero fraction.
     let createdUTC: Double
+    /// the type of post. "image" for images, "link" for links, "hosted:video" for videos
+    let postHint: String?
     
     enum CodingKeys: String, CodingKey {
         case author
@@ -114,5 +116,6 @@ struct ListingChildData: Codable {
         case subredditId = "subreddit_id"
         case thumbnail, title, url, distinguished, stickied, ups, downs, created
         case createdUTC = "created_utc"
+        case postHint = "post_hint"
     }
 }
