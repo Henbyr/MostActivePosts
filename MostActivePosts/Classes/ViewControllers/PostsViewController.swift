@@ -31,6 +31,7 @@ class PostsViewController: UITableViewController, PostsViewProtocol {
         controller.delegate = self
         return controller
     }()
+    
     private var isFetchingNextPage: Bool = false
     
     override func viewDidLoad() {
@@ -46,8 +47,8 @@ class PostsViewController: UITableViewController, PostsViewProtocol {
     private func fetchPosts() {
         do {
             try fetchedResultsController.performFetch()
-        } catch let error as NSError {
-            print("Fetching error: \(error.localizedDescription)")
+        } catch {
+            print("Error: \(error). Could not fetch records.")
         }
     }
 }

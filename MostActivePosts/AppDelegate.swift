@@ -18,13 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        if let postsViewController = window?.rootViewController as? PostsViewController {
-            let service = ListingService(authorizer: Authorizer())
-            let model = PostsModel(listingService: service, coreDataStack: coreDataStack)
-            
-            postsViewController.presenter = PostsPresenter(view: postsViewController, model: model)
-            postsViewController.coreDataStack = coreDataStack
-        }
+        assemblePostsViewController()
         
         return true
     }
@@ -35,6 +29,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         coreDataStack.saveContext()
+    }
+    
+    private func assemblePostsViewController() {
+        if let postsNavigationController = window?.rootViewController as? UINavigationController,
+            let postsViewController = postsNavigationController.topViewController as? PostsViewController {
+                let service = ListingService(authorizer: Authorizer())
+                let model = PostsModel(listingService: service, coreDataStack: coreDataStack)
+            
+                postsViewController.presenter = PostsPresenter(view: postsViewController, model: model)
+                postsViewController.coreDataStack = coreDataStack
+        }
     }
 }
 
