@@ -69,11 +69,31 @@ extension PostsViewController {
             let post = fetchedResultsController.object(at: indexPath)
             
             cell.configure(with: post)
+            cell.delegate = self
             
             return cell
         }
         
         return UITableViewCell()
+    }
+}
+
+extension PostsViewController: PostTableViewCellDelegate {
+    func thumbnailDidTap(at cell: PostTableViewCell) {
+        if let cellIndexPath = tableView.indexPath(for: cell) {
+            
+            if cell.isPictureShown {
+                cell.hidePicture()
+            } else {
+                let post = fetchedResultsController.object(at: cellIndexPath)
+                if let postPictureUrlString = post.imageUrlString {
+                    cell.showPicture(by: postPictureUrlString)
+                }
+            }
+            
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
     }
 }
 
