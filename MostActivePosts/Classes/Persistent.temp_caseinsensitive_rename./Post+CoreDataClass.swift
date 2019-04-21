@@ -33,7 +33,7 @@ public class Post: NSManagedObject {
     
     func update(listingChildData: ListingChildData) {
         self.author = listingChildData.author
-        self.entryDate = NSDate(timeIntervalSince1970: listingChildData.createdUTC) //TODO: check it
+        self.entryDate = NSDate(timeIntervalSince1970: listingChildData.createdUTC)
         self.imageUrl = listingChildData.url
         if listingChildData.thumbnail != "self" && listingChildData.thumbnail != "default" {
             self.thumbnailUrl = listingChildData.thumbnail
@@ -42,5 +42,6 @@ public class Post: NSManagedObject {
         self.title = listingChildData.title
         self.likes = Int32(listingChildData.ups)
         self.postHint = listingChildData.postHint
+        self.score = Int32(listingChildData.score)
     }
 }

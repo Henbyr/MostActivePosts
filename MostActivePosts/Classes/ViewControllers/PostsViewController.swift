@@ -6,6 +6,7 @@
 //  Copyright © 2019 Eugene Lobyr. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import CoreData
 
@@ -18,9 +19,14 @@ class PostsViewController: UITableViewController, PostsViewProtocol {
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Post> = {
         let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
+        
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()) as NSDate?
+        fetchRequest.predicate = NSPredicate(format: "%K > %@",
+                                             #keyPath(Post.entryDate),
+                                             yesterday!)
         fetchRequest.fetchLimit = 25
         
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "likes", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "score", ascending: false)]
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: coreDataStack.managedContext,

@@ -35,7 +35,7 @@ class PostsModel: PostsModelProtocol {
                 
                 self.syncPosts(listingData: listingResponse.data, syncContext: syncContext)
                 self.afterPost = listingResponse.data.after
-            case .failure(let error):
+            case .failure:
                 break
             }
         }

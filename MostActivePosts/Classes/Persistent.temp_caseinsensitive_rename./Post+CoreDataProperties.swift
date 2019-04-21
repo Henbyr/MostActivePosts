@@ -2,7 +2,7 @@
 //  Post+CoreDataProperties.swift
 //  MostActivePosts
 //
-//  Created by Eugene Lobyr on 4/20/19.
+//  Created by Eugene Lobyr on 4/21/19.
 //  Copyright © 2019 Eugene Lobyr. All rights reserved.
 //
 //
@@ -20,10 +20,11 @@ extension Post {
     @NSManaged public var author: String?
     @NSManaged public var entryDate: NSDate?
     @NSManaged public var imageUrl: String?
+    @NSManaged public var likes: Int32
     @NSManaged public var postHint: String?
     @NSManaged public var thumbnailUrl: String?
     @NSManaged public var title: String?
     @NSManaged public var totalComments: Int32
-    @NSManaged public var likes: Int32
+    @NSManaged public var score: Int32
 
 }
