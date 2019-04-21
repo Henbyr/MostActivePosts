@@ -95,6 +95,26 @@ extension PostsViewController: PostTableViewCellDelegate {
             tableView.endUpdates()
         }
     }
+    
+    func pictureDidTap(at cell: PostTableViewCell) {
+        UIImageWriteToSavedPhotosAlbum(cell.pictureImageView.image!, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            let alertController = UIAlertController(title: "Save error",
+                                                    message: error.localizedDescription,
+                                                    preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alertController, animated: true)
+        } else {
+            let alertController = UIAlertController(title: "Saved",
+                                                    message: "This post's picture has been saved to your photos.",
+                                                    preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alertController, animated: true)
+        }
+    }
 }
 
 extension PostsViewController: NSFetchedResultsControllerDelegate {

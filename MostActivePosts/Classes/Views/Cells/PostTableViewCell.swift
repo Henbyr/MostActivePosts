@@ -10,6 +10,7 @@ import UIKit
 
 protocol PostTableViewCellDelegate: class {
     func thumbnailDidTap(at cell: PostTableViewCell)
+    func pictureDidTap(at cell: PostTableViewCell)
 }
 
 class PostTableViewCell: UITableViewCell {
@@ -19,15 +20,16 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var pictureImageView: UIImageView!
     
+    @IBOutlet weak var pitcureHeight: NSLayoutConstraint!
+    
     static var cellIdentifier: String {
         return String(describing: self)
     }
+    weak var delegate: PostTableViewCellDelegate?
     
     var isPictureShown: Bool {
-        return pictureImageView.image != nil
+        return pitcureHeight.constant != 0
     }
-    
-    weak var delegate: PostTableViewCellDelegate?
     
     func configure(with post: Post) {
         if let urlString = post.thumbnailUrl {
@@ -39,20 +41,30 @@ class PostTableViewCell: UITableViewCell {
         titleLabel.text = post.title
         commentsLabel.text = "\(post.totalComments) Comments"
         
-        if isPictureShown {
-            hidePicture()
+        if let urlString = post.imageUrlString {
+            pictureImageView.cacheImage(urlString: urlString)
+            pictureImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pictureTapHandler)))
         }
+        hidePicture()
     }
     
-    @objc private func thumbnailTapHandler(sender: UITapGestureRecognizer? = nil) {
+    @objc private func thumbnailTapHandler(sender: UITapGestureRecognizer) {
+        guard sender.state == .ended else { return }
+        
         delegate?.thumbnailDidTap(at: self)
     }
     
+    @objc private func pictureTapHandler(sender: UITapGestureRecognizer) {
+        guard sender.state == .ended else { return }
+        
+        delegate?.pictureDidTap(at: self)
+    }
+    
     func showPicture(by urlString: String) {
-        pictureImageView.cacheImage(urlString: urlString)
+        pitcureHeight.constant = 300
     }
     
     func hidePicture() {
-        pictureImageView.image = nil
+        pitcureHeight.constant = 0
     }
 }
