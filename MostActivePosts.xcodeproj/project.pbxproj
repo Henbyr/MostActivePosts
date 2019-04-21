@@ -18,7 +18,16 @@
 		4430B2C322665F950089758D /* Authorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C222665F950089758D /* Authorizer.swift */; };
 		4430B2C62266751A0089758D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2C52266751A0089758D /* Session.swift */; };
 		4430B2CB2266791E0089758D /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430B2CA2266791E0089758D /* TokenResponse.swift */; };
+		445B9522226AFD06009ECF8B /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B9521226AFD06009ECF8B /* PostTableViewCell.swift */; };
+		445B9525226B0CE1009ECF8B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B9524226B0CE1009ECF8B /* UIImageView+Extension.swift */; };
 		4468B8FE2267B7FE00F56F93 /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4468B8FD2267B7FE00F56F93 /* OAuthToken.swift */; };
+		44F3222322690FFB00A48362 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3222222690FFB00A48362 /* PostsViewController.swift */; };
+		44F32227226923FE00A48362 /* PostsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F32226226923FE00A48362 /* PostsPresenter.swift */; };
+		44F322292269240900A48362 /* PostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F322282269240900A48362 /* PostsModel.swift */; };
+		44F3222D2269C04500A48362 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44F3222B2269C04500A48362 /* Model.xcdatamodeld */; };
+		44F322302269C1E000A48362 /* Post+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3222E2269C1E000A48362 /* Post+CoreDataClass.swift */; };
+		44F322312269C1E000A48362 /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3222F2269C1E000A48362 /* Post+CoreDataProperties.swift */; };
+		44F322332269C29700A48362 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F322322269C29700A48362 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +44,16 @@
 		4430B2C222665F950089758D /* Authorizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorizer.swift; sourceTree = "<group>"; };
 		4430B2C52266751A0089758D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		4430B2CA2266791E0089758D /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
+		445B9521226AFD06009ECF8B /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		445B9524226B0CE1009ECF8B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		4468B8FD2267B7FE00F56F93 /* OAuthToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthToken.swift; sourceTree = "<group>"; };
+		44F3222222690FFB00A48362 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
+		44F32226226923FE00A48362 /* PostsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsPresenter.swift; sourceTree = "<group>"; };
+		44F322282269240900A48362 /* PostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsModel.swift; sourceTree = "<group>"; };
+		44F3222C2269C04500A48362 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		44F3222E2269C1E000A48362 /* Post+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataClass.swift"; sourceTree = "<group>"; };
+		44F3222F2269C1E000A48362 /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		44F322322269C29700A48362 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +122,22 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		445B9520226AFCF1009ECF8B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				445B9521226AFD06009ECF8B /* PostTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		445B9523226B0CBD009ECF8B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				445B9524226B0CE1009ECF8B /* UIImageView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		4478942E22665EB700E31C12 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,8 +150,14 @@
 		4478942F22665EC300E31C12 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				445B9523226B0CBD009ECF8B /* Extensions */,
 				441FE02622674FA4006932AE /* Helper */,
+				44F32225226923E600A48362 /* Models */,
 				4478943022665EEE00E31C12 /* Networking */,
+				44F3222A2269BFD500A48362 /* Persistent */,
+				44F32224226923DB00A48362 /* Presenters */,
+				44F3222122690FD700A48362 /* ViewControllers */,
+				44CCD9C9226AFCAB00D447F9 /* Views */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -131,6 +171,50 @@
 				441FE02922676635006932AE /* ListingService.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		44CCD9C9226AFCAB00D447F9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				445B9520226AFCF1009ECF8B /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		44F3222122690FD700A48362 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				44F3222222690FFB00A48362 /* PostsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		44F32224226923DB00A48362 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				44F32226226923FE00A48362 /* PostsPresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		44F32225226923E600A48362 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				44F322282269240900A48362 /* PostsModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		44F3222A2269BFD500A48362 /* Persistent */ = {
+			isa = PBXGroup;
+			children = (
+				44F322322269C29700A48362 /* CoreDataStack.swift */,
+				44F3222E2269C1E000A48362 /* Post+CoreDataClass.swift */,
+				44F3222F2269C1E000A48362 /* Post+CoreDataProperties.swift */,
+				44F3222B2269C04500A48362 /* Model.xcdatamodeld */,
+			);
+			name = Persistent;
+			path = Persistent.temp_caseinsensitive_rename.;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,13 +289,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				4411BC9D2266591E002CCA0F /* AppDelegate.swift in Sources */,
+				44F322302269C1E000A48362 /* Post+CoreDataClass.swift in Sources */,
+				445B9522226AFD06009ECF8B /* PostTableViewCell.swift in Sources */,
 				441FE02C22677E73006932AE /* ListingResponse.swift in Sources */,
 				4468B8FE2267B7FE00F56F93 /* OAuthToken.swift in Sources */,
+				44F32227226923FE00A48362 /* PostsPresenter.swift in Sources */,
 				4430B2C322665F950089758D /* Authorizer.swift in Sources */,
+				44F322292269240900A48362 /* PostsModel.swift in Sources */,
+				44F322332269C29700A48362 /* CoreDataStack.swift in Sources */,
+				44F3222322690FFB00A48362 /* PostsViewController.swift in Sources */,
+				44F322312269C1E000A48362 /* Post+CoreDataProperties.swift in Sources */,
 				441FE02A22676635006932AE /* ListingService.swift in Sources */,
+				445B9525226B0CE1009ECF8B /* UIImageView+Extension.swift in Sources */,
 				4430B2C62266751A0089758D /* Session.swift in Sources */,
 				4430B2CB2266791E0089758D /* TokenResponse.swift in Sources */,
 				441FE02822674FBE006932AE /* UserDefaultsKeys.swift in Sources */,
+				44F3222D2269C04500A48362 /* Model.xcdatamodeld in Sources */,
 				441FE02222674389006932AE /* TokenRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +505,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		44F3222B2269C04500A48362 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				44F3222C2269C04500A48362 /* Model.xcdatamodel */,
+			);
+			currentVersion = 44F3222C2269C04500A48362 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4411BC912266591E002CCA0F /* Project object */;
 }

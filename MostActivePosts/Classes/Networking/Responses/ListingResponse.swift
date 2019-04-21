@@ -81,9 +81,6 @@ struct ListingChildData: Codable {
     let title: String
     /// the link of this post. the permalink if this is a self-post
     let url: String
-    /// Indicates if link has been edited. Will be the edit timestamp if the link has been edited and return false otherwise.
-    /// https://github.com/reddit/reddit/issues/581
-    let edited: Bool?
     /// to allow determining whether they have been distinguished by moderators/admins. null = not distinguished. moderator = the green [M].
     /// admin = the red [A]. special = various other special distinguishes http://bit.ly/ZYI47B
     let distinguished: String?
@@ -97,6 +94,8 @@ struct ListingChildData: Codable {
     let created: Double
     /// the time of creation in UTC epoch-second format. Note that neither of these ever have a non-zero fraction.
     let createdUTC: Double
+    /// the type of post. "image" for images, "link" for links, "hosted:video" for videos
+    let postHint: String?
     
     enum CodingKeys: String, CodingKey {
         case author
@@ -115,7 +114,8 @@ struct ListingChildData: Codable {
         case selftextHTML = "selftext_html"
         case subreddit
         case subredditId = "subreddit_id"
-        case thumbnail, title, url, edited, distinguished, stickied, ups, downs, created
+        case thumbnail, title, url, distinguished, stickied, ups, downs, created
         case createdUTC = "created_utc"
+        case postHint = "post_hint"
     }
 }

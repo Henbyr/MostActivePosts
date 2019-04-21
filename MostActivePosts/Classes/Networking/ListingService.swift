@@ -8,10 +8,65 @@
 
 import Foundation
 
-class ListingService {
+enum PostsServiceEndPoint {
+    case top(before: String?, after: String?)
     
-    func fetch(endpoint: EndPoint, completion: @escaping (Result<ListingResponse, SessionError>) -> Void) {
-        let authorizer = Authorizer()
+    private var baseUrl: URL? {
+        return URL(string: "https://oauth.reddit.com")
+    }
+    
+    private var endpointUrl: URL? {
+        guard var url = baseUrl else { return nil }
+        
+        switch self {
+        case .top(let before, let after):
+            url.appendPathComponent("top")
+            
+            var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+            components?.queryItems = [
+                URLQueryItem(name: "limit", value: "50")
+            ]
+            
+            if let _ = before {
+                components?.queryItems?.append(URLQueryItem(name: "before", value: before))
+            }
+            if let _ = after {
+                components?.queryItems?.append(URLQueryItem(name: "after", value: after))
+            }
+            
+            return components?.url
+        }
+        
+    }
+    
+    var request: URLRequest? {
+        switch self {
+        case .top:
+            guard let endpointUrl = endpointUrl else { return nil }
+            
+            var request = URLRequest(url: endpointUrl)
+            request.httpMethod = "GET"
+            request.setValue("ios:com.example.mostactiveposts:v1.0.0 (by /u/e_oneg1n)", forHTTPHeaderField: "User-Agent")
+            
+            return request
+        }
+    }
+}
+
+protocol PostsServiceProtocol {
+    init(authorizer: Authorizer)
+    
+    func fetch(endpoint: PostsServiceEndPoint, completion: @escaping (Result<ListingResponse, SessionError>) -> Void)
+}
+
+class ListingService: PostsServiceProtocol {
+    private let authorizer: Authorizer
+    
+    required init(authorizer: Authorizer) {
+        self.authorizer = authorizer
+    }
+    
+    func fetch(endpoint: PostsServiceEndPoint, completion: @escaping (Result<ListingResponse, SessionError>) -> Void) {
         authorizer.obtainToken(endpoint: .appOnly) { result in
             switch result {
             case .success(let token):
@@ -31,56 +86,6 @@ class ListingService {
                 })
             case .failure(let error):
                 completion(.failure(error))
-            }
-        }
-    }
-    
-}
-
-// MARK: - Nested types
-extension ListingService {
-    enum EndPoint {
-        case top(before: String?, after: String?)
-        
-        private var baseUrl: URL? {
-            return URL(string: "https://oauth.reddit.com")
-        }
-        
-        private var endpointUrl: URL? {
-            guard var url = baseUrl else { return nil }
-            
-            switch self {
-            case .top(let before, let after):
-                url.appendPathComponent("top")
-                
-                var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
-                components?.queryItems = [
-                    URLQueryItem(name: "limit", value: "25"),
-                    URLQueryItem(name: "count", value: "25")
-                ]
-                
-                if let _ = before {
-                    components?.queryItems?.append(URLQueryItem(name: "before", value: before))
-                }
-                if let _ = after {
-                    components?.queryItems?.append(URLQueryItem(name: "after", value: after))
-                }
-                
-                return components?.url
-            }
-            
-        }
-        
-        var request: URLRequest? {
-            switch self {
-            case .top:
-                guard let endpointUrl = endpointUrl else { return nil }
-                
-                var request = URLRequest(url: endpointUrl)
-                request.httpMethod = "GET"
-                request.setValue("ios:com.example.mostactiveposts:v1.0.0 (by /u/e_oneg1n)", forHTTPHeaderField: "User-Agent")
-                
-                return request
             }
         }
     }
