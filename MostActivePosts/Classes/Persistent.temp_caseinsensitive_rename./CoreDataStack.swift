@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
-    
     private let modelName: String
     
     init(modelName: String) {
@@ -45,8 +44,8 @@ class CoreDataStack {
         
         do {
             try managedContext.save()
-        } catch let error as NSError {
-            print("Unresolved error \(error), \(error.userInfo)")
+        } catch {
+            print("Error: \(error). Could not save changes.")
         }
     }
 }

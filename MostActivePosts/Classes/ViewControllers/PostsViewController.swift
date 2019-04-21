@@ -106,7 +106,7 @@ extension PostsViewController: PostTableViewCellDelegate {
         UIImageWriteToSavedPhotosAlbum(cell.pictureImageView.image!, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+    @objc private func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             let alertController = UIAlertController(title: "Save error",
                                                     message: error.localizedDescription,

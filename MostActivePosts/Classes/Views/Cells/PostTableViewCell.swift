@@ -20,7 +20,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var pictureImageView: UIImageView!
     
-    @IBOutlet weak var pitcureHeight: NSLayoutConstraint!
+    @IBOutlet weak var pitcureHeightConstraint: NSLayoutConstraint!
     
     static var cellIdentifier: String {
         return String(describing: self)
@@ -28,7 +28,7 @@ class PostTableViewCell: UITableViewCell {
     weak var delegate: PostTableViewCellDelegate?
     
     var isPictureShown: Bool {
-        return pitcureHeight.constant != 0
+        return pitcureHeightConstraint.constant != 0
     }
     
     func configure(with post: Post) {
@@ -61,10 +61,10 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func showPicture(by urlString: String) {
-        pitcureHeight.constant = 300
+        pitcureHeightConstraint.constant = 300
     }
     
     func hidePicture() {
-        pitcureHeight.constant = 0
+        pitcureHeightConstraint.constant = 0
     }
 }

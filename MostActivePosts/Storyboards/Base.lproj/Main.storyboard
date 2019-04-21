@@ -79,7 +79,7 @@
                                 <connections>
                                     <outlet property="commentsLabel" destination="CTf-Gx-Glx" id="dAc-YX-15l"/>
                                     <outlet property="pictureImageView" destination="ats-am-sKw" id="vFD-sd-HY8"/>
-                                    <outlet property="pitcureHeight" destination="ODt-Dc-feK" id="iZV-sr-eeY"/>
+                                    <outlet property="pitcureHeightConstraint" destination="ODt-Dc-feK" id="iZV-sr-eeY"/>
                                     <outlet property="thumbnailImageView" destination="QVH-9z-msE" id="4eq-1e-9vp"/>
                                     <outlet property="timeLabel" destination="gmR-JK-0PH" id="fMh-5y-8bP"/>
                                     <outlet property="titleLabel" destination="wZC-eb-bVE" id="5ag-B4-Apu"/>

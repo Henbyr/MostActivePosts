@@ -9,7 +9,6 @@
 import Foundation
 
 struct OAuthToken: Codable {
-    
     var accessToken: String
     var expiresInDate: Date
     
@@ -17,5 +16,4 @@ struct OAuthToken: Codable {
         self.accessToken = response.accessToken
         self.expiresInDate = Date(timeIntervalSinceNow: response.expiresIn)
     }
-    
 }

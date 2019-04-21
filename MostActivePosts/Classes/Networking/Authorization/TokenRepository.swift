@@ -9,7 +9,6 @@
 import Foundation
 
 class TokenRepository {
-    
     class func save(token: OAuthToken) {
         UserDefaults.standard.set(try? PropertyListEncoder().encode(token), forKey: UserDefaultsKeys.oauthToken)
     }
@@ -21,5 +20,4 @@ class TokenRepository {
         
         return try? PropertyListDecoder().decode(OAuthToken.self, from: tokenData)
     }
-    
 }
